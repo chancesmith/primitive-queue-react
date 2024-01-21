@@ -1,5 +1,5 @@
 type Queue<T> = {
-  enqueue: (item: T) => void;
+  enqueue: (item: T) => boolean;
   dequeue: () => T | undefined;
   isEmpty: () => boolean;
   peek: () => T | undefined;
@@ -12,7 +12,11 @@ export function createQueue<T>(): Queue<T> {
 
   return {
     enqueue: (item: T) => {
+      if (queue.includes(item)) {
+        return false;
+      }
       queue.push(item);
+      return true;
     },
     dequeue: () => queue.shift(),
     size: () => queue.length,

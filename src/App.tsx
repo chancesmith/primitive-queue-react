@@ -11,7 +11,11 @@ function App() {
 
   const enqueueItem = () => {
     if (item) {
-      queue.enqueue(Number(item));
+      const success = queue.enqueue(Number(item));
+      if (!success) {
+        alert("Queue already has that item.");
+        return;
+      }
       setItem("");
     }
   };
@@ -29,9 +33,15 @@ function App() {
           value={item}
           onChange={(e) => setItem(e.target.value)}
         />
-        <button onClick={enqueueItem}>Enqueue</button>
-        <button onClick={dequeueItem}>Dequeue</button>
-        <div>Dequeued Item: {dequeuedItem}</div>
+        <button onClick={enqueueItem} style={{ marginLeft: "1rem" }}>
+          Enqueue
+        </button>
+        <p>
+          Dequeued Item: {dequeuedItem}{" "}
+          <button onClick={dequeueItem} style={{ marginLeft: "1rem" }}>
+            Dequeue
+          </button>
+        </p>
       </div>
       <h2>Queue:</h2>
       <ol>

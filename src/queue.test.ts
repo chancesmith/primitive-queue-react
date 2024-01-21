@@ -38,4 +38,9 @@ describe("queue", () => {
     queue.enqueue(2);
     expect(queue.list()).toEqual([1, 2]);
   });
+  it("should prevent adding dulicate items", () => {
+    const queue = createQueue<number>();
+    expect(queue.enqueue(1)).toBe(true);
+    expect(queue.enqueue(1)).toBe(false);
+  });
 });
