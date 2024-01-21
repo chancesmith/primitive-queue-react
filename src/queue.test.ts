@@ -32,4 +32,10 @@ describe("queue", () => {
     expect(queue.dequeue()).toBe(2);
     expect(queue.peek()).toBe(undefined);
   });
+  it("should list items in queue", () => {
+    const queue = createQueue<number>();
+    queue.enqueue(1);
+    queue.enqueue(2);
+    expect(queue.list()).toEqual([1, 2]);
+  });
 });
