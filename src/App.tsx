@@ -1,9 +1,9 @@
 import { useState } from "react";
 import "./App.css";
-import { createQueue } from "./queue";
+import { createPrimitiveQueue } from "./primitiveQueue";
 
 function App() {
-  const [queue] = useState(createQueue<number>());
+  const [queue] = useState(createPrimitiveQueue<number>());
   const [item, setItem] = useState("");
   const [dequeuedItem, setDequeuedItem] = useState<number | undefined>(
     undefined

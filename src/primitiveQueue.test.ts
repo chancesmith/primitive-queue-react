@@ -1,20 +1,20 @@
-import { createQueue } from "./queue";
+import { createPrimitiveQueue } from "./primitiveQueue";
 
 describe("queue", () => {
   it("should start empty", () => {
-    const queue = createQueue<number>();
+    const queue = createPrimitiveQueue<number>();
     expect(queue.size()).toBe(0);
     expect(queue.isEmpty()).toBe(true);
   });
   it("should have size 1 when one item is added", () => {
-    const queue = createQueue<number>();
+    const queue = createPrimitiveQueue<number>();
     queue.enqueue(1);
     expect(queue.size()).toBe(1);
     queue.enqueue(2);
     expect(queue.size()).toBe(2);
   });
   it("should have size 0 when one item is added and removed", () => {
-    const queue = createQueue<number>();
+    const queue = createPrimitiveQueue<number>();
     queue.enqueue(1);
     queue.enqueue(2);
     queue.dequeue();
@@ -22,8 +22,12 @@ describe("queue", () => {
     queue.dequeue();
     expect(queue.size()).toBe(0);
   });
+  it("should have return undefined if queue is empty", () => {
+    const queue = createPrimitiveQueue<number>();
+    expect(queue.dequeue()).toBe(undefined);
+  });
   it("should be able to see active item in queue", () => {
-    const queue = createQueue<number>();
+    const queue = createPrimitiveQueue<number>();
     queue.enqueue(1);
     queue.enqueue(2);
     expect(queue.peek()).toBe(1);
@@ -33,13 +37,13 @@ describe("queue", () => {
     expect(queue.peek()).toBe(undefined);
   });
   it("should list items in queue", () => {
-    const queue = createQueue<number>();
+    const queue = createPrimitiveQueue<number>();
     queue.enqueue(1);
     queue.enqueue(2);
     expect(queue.list()).toEqual([1, 2]);
   });
-  it("should prevent adding dulicate items", () => {
-    const queue = createQueue<number>();
+  it("should prevent adding duplicate items", () => {
+    const queue = createPrimitiveQueue<number>();
     expect(queue.enqueue(1)).toBe(true);
     expect(queue.enqueue(1)).toBe(false);
   });
