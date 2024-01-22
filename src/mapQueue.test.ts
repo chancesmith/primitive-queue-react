@@ -71,4 +71,34 @@ describe("queue", () => {
     expect(queue.enqueue(download1)).toBe(true);
     expect(queue.enqueue(download1)).toBe(false);
   });
+  it("should see into any item in queue", () => {
+    const queue = createMapQueue<Download>();
+    expect(queue.peekAt(download1.id)).toBeUndefined();
+    queue.enqueue(download1);
+    queue.enqueue(download2);
+    expect(queue.peekAt(download1.id)).toBe(download1);
+  });
+  it("should drop item from queue by ID", () => {
+    const queue = createMapQueue<Download>();
+    expect(queue.drop(download1.id)).toBe(false);
+    queue.enqueue(download1);
+    expect(queue.length()).toBe(1);
+    expect(queue.drop(download1.id)).toBe(true);
+    expect(queue.length()).toBe(0);
+  });
+  it("should clear the queue", () => {
+    const queue = createMapQueue<Download>();
+    queue.enqueue(download1);
+    queue.enqueue(download2);
+    expect(queue.length()).toBe(2);
+    queue.clear();
+    expect(queue.length()).toBe(0);
+  });
+  it("should load a queue from a list", () => {
+    const queue = createMapQueue<Download>();
+    queue.load([download1, download2]);
+    expect(queue.length()).toBe(2);
+    expect(queue.head()).toBe(download1);
+    expect(queue.tail()).toBe(download2);
+  });
 });
