@@ -67,7 +67,6 @@ export function createMapQueue<T extends Queuable>(handler: Handler): Queue<T> {
 
   const drop = (id: string) => {
     if (queue.has(id)) {
-      const wasFirstItem = queue.get(id) === head();
       queue.delete(id);
       return true;
     }
